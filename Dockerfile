@@ -1,11 +1,11 @@
-FROM debian:stable-slim
+FROM alpine
 
 MAINTAINER Santiago Platero (https://github.com/plater777)
 
-RUN apt-get update && \
-  apt-get install -y nikto && \
-  apt-get autoclean
+RUN apk update && \
+	apk add --no-cache nikto perl-net-ssleay && \
+	rm -f /tmp/* /etc/apk/cache/*
 
-ENTRYPOINT ["nikto"]
+ENTRYPOINT ["nikto.pl"]
 
-CMD ["--help"]
+CMD ["-Help"]
